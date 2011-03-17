@@ -37,7 +37,11 @@ JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
     //Qlistview
 
     QDockWidget *dock = new QDockWidget("Ferramentas");
+    QDockWidget *dock2 = new QDockWidget("Ferramentas2");
+
     this->listView = new QListView(dock);
+
+
 
     this->model = new QStringListModel(this);
     //this->fileList << "lkajdfladkfj";
@@ -45,7 +49,10 @@ JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
 
     this->listView->setModel(model);
     dock->setWidget(this->listView);
+
     addDockWidget(Qt::LeftDockWidgetArea, dock);
+    addDockWidget(Qt::RightDockWidgetArea, dock2);
+
 
     QToolBar *tool = new QToolBar("Barra de ferramentas");
     tool->addAction(newFile);
