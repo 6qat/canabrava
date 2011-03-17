@@ -2,4 +2,11 @@
 
 GentleLineEdit::GentleLineEdit(QWidget *p):QLineEdit(p)
 {
+
 }
+
+void GentleLineEdit::paintEvent ( QPaintEvent * )
+{
+
+}
+

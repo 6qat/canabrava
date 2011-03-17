@@ -14,6 +14,12 @@
 #include <QDockWidget>
 #include <QDebug>
 
+#include <QFileDialog>
+#include <QFile>
+
+#include <QMessageBox>
+
+#include "relogio.h"
 
 JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
 {
@@ -26,6 +32,8 @@ JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
 
     connect(exitProgram, SIGNAL(triggered()), this, SLOT(close()));
     connect(newFile, SIGNAL(triggered()),this,SLOT(createFile() ));
+    connect(openFile, SIGNAL(triggered()),this,SLOT(openFile() ));
+
 
     QMenu *menu = new QMenu("Arquivo");
     menu->addAction(newFile);
@@ -68,6 +76,8 @@ JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
     this->setCentralWidget(textEdit);
 
     connect(this->listView,SIGNAL(clicked(QModelIndex)), this,SLOT(fileSelected(QModelIndex)));
+
+    relogio = new Relogio;
 }
 
 JanelaPrincipal::~JanelaPrincipal()
@@ -88,6 +98,49 @@ void JanelaPrincipal::createFile()
 
 }
 
+
+void JanelaPrincipal::openFile()
+{
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setViewMode(QFileDialog::Detail);
+    QStringList fileNames;
+    if (dialog.exec())
+        fileNames = dialog.selectedFiles();
+
+    if (!fileNames.count())
+        return;
+
+    qDebug() << fileNames;
+    QString fileName = fileNames[0];
+
+    QFile arq(fileName);
+    QString texto;
+
+    if (arq.open(QFile::ReadOnly))
+    {
+        QTextStream data(&arq);
+
+        texto = data.readAll();
+
+        qDebug() << texto;
+    }
+    else
+    {
+        QMessageBox::warning(this,"Erro",QString("Impossivel abrir o arquivo %1").arg(fileName));
+        return;
+    }
+
+    this->fileList << fileName;
+    this->fileHash[fileName]=texto;
+    this->model->setStringList(this->fileList);
+    QTextEdit *textEdit = qobject_cast<QTextEdit*>( this->centralWidget() );
+    textEdit->setPlainText(texto);
+
+    //this->currentFileIndex
+
+}
+
 void JanelaPrincipal::fileSelected(QModelIndex idx)
 {
     /*
@@ -98,14 +151,19 @@ void JanelaPrincipal::fileSelected(QModelIndex idx)
      * Mostra o texto
      */
     QTextEdit *textEdit = qobject_cast<QTextEdit*>( this->centralWidget() );
+
     QString oldFileName = this->model->data(this->currentFileIndex, Qt::DisplayRole).toString();
     this->fileHash[oldFileName] = textEdit->toPlainText();
 
 
     this->currentFileIndex = idx;
-    QString fileName =  this->model->data(idx, Qt::DisplayRole ).toString() ;
+    //QString fileName =  this->model->data(idx, Qt::DisplayRole ).toString() ;
+    QString fileName = this->fileList[idx.row()];
     textEdit->setPlainText(this->fileHash[fileName]);
 
+
     qDebug() << "Arquivo selecionado: " << fileName;
+    qDebug() << "Conteudo do arquivo: " << this->fileHash[fileName];
+
 
 }

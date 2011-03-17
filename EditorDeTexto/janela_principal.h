@@ -9,6 +9,7 @@
 #include <QString>
 #include <QListView>
 #include <QModelIndex>
+#include "relogio.h"
 
 class JanelaPrincipal: public QMainWindow
 {
@@ -23,10 +24,12 @@ private:
     QHash<QString,QString> fileHash;
     QListView *listView;
     QModelIndex currentFileIndex; // Arquivo atual selecionado
+    Relogio *relogio;
 
 private slots:
     void createFile();
     void fileSelected(QModelIndex idx);
+    void openFile();
 
 
 };

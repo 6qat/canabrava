@@ -20,8 +20,10 @@ TEMPLATE = app
 SOURCES += main.cpp \
     janela_principal.cpp \
     test_string.cpp \
-    gentle_line_edit.cpp
+    gentle_line_edit.cpp \
+    relogio.cpp
 
 HEADERS += \
     janela_principal.h \
-    gentle_line_edit.h
+    gentle_line_edit.h \
+    relogio.h
