@@ -7,6 +7,8 @@
 #include <QStringListModel>
 #include <QHash>
 #include <QString>
+#include <QListView>
+#include <QModelIndex>
 
 class JanelaPrincipal: public QMainWindow
 {
@@ -19,10 +21,12 @@ private:
     QStringList fileList;
     QStringListModel *model;
     QHash<QString,QString> fileHash;
+    QListView *listView;
+    QModelIndex currentFileIndex; // Arquivo atual selecionado
 
 private slots:
     void createFile();
-    void fileSelected();
+    void fileSelected(QModelIndex idx);
 
 
 };

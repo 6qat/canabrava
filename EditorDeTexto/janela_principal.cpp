@@ -12,7 +12,7 @@
 #include <QLineEdit>
 
 #include <QDockWidget>
-
+#include <QDebug>
 
 
 JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
@@ -37,14 +37,14 @@ JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
     //Qlistview
 
     QDockWidget *dock = new QDockWidget("Ferramentas");
-    QListView *listView = new QListView(dock);
+    this->listView = new QListView(dock);
 
     this->model = new QStringListModel(this);
     //this->fileList << "lkajdfladkfj";
     this->model->setStringList(this->fileList);
 
-    listView->setModel(model);
-    dock->setWidget(listView);
+    this->listView->setModel(model);
+    dock->setWidget(this->listView);
     addDockWidget(Qt::LeftDockWidgetArea, dock);
 
     QToolBar *tool = new QToolBar("Barra de ferramentas");
@@ -59,6 +59,8 @@ JanelaPrincipal::JanelaPrincipal(QWidget *pai):QMainWindow(pai)
     QTextEdit *textEdit = new QTextEdit(this);
     textEdit->setAcceptRichText(true);
     this->setCentralWidget(textEdit);
+
+    connect(this->listView,SIGNAL(clicked(QModelIndex)), this,SLOT(fileSelected(QModelIndex)));
 }
 
 JanelaPrincipal::~JanelaPrincipal()
@@ -79,7 +81,24 @@ void JanelaPrincipal::createFile()
 
 }
 
-void JanelaPrincipal::fileSelected()
+void JanelaPrincipal::fileSelected(QModelIndex idx)
 {
+    /*
+     * Salva o texto atual no arquivo anterior
+     * Pega o nome do novo arquivo selecionado em fileList
+     * Apaga o texto atual
+     * Pega o texto correspondente no hash
+     * Mostra o texto
+     */
+    QTextEdit *textEdit = qobject_cast<QTextEdit*>( this->centralWidget() );
+    QString oldFileName = this->model->data(this->currentFileIndex, Qt::DisplayRole).toString();
+    this->fileHash[oldFileName] = textEdit->toPlainText();
+
+
+    this->currentFileIndex = idx;
+    QString fileName =  this->model->data(idx, Qt::DisplayRole ).toString() ;
+    textEdit->setPlainText(this->fileHash[fileName]);
+
+    qDebug() << "Arquivo selecionado: " << fileName;
 
 }
