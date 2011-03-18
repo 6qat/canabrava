@@ -21,9 +21,11 @@ SOURCES += main.cpp \
     janela_principal.cpp \
     test_string.cpp \
     gentle_line_edit.cpp \
-    relogio.cpp
+    relogio.cpp \
+    switch_button.cpp
 
 HEADERS += \
     janela_principal.h \
     gentle_line_edit.h \
-    relogio.h
+    relogio.h \
+    switch_button.h

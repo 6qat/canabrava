@@ -2,6 +2,9 @@
 #include <QLabel>
 #include "janela_principal.h"
 #include "relogio.h"
+#include "switch_button.h"
+
+
 
 int main(int argc, char *argv[])
 {
@@ -13,8 +16,12 @@ int main(int argc, char *argv[])
     //JanelaPrincipal janela;
     //janela.show();
 
-    Relogio relogio;
-    relogio.show();
+    //Relogio relogio;
+    //relogio.show();
+
+    SwitchButton *btn = new SwitchButton();
+    QObject::connect(btn,SIGNAL(stateChanged(stateType)),btn, SLOT(teste(stateType)));
+    btn->show();
 
     return a.exec();
 }
