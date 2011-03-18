@@ -4,10 +4,10 @@
 #include <QTime>
 
 Relogio::Relogio(QWidget *parent) :
-    QWidget(parent),angleSecond(0)
+    QWidget(parent),angleSecond(0),angleMinute(0),angleHour(0)
 {
     timer = new QTimer(this);
-    timer->setInterval(1000);
+    timer->setInterval(100);
     timer->start();
 
     connect(timer,SIGNAL(timeout()),this,SLOT(update()));
@@ -27,6 +27,8 @@ void Relogio::paintEvent(QPaintEvent *event)
 
     QTime time = QTime::currentTime();
     this->angleSecond = 180 + time.second()*6;
+    this->angleMinute = 180 + time.minute()*6;
+    this->angleHour = 180 + time.hour()*30;
 
     // Horas
     painter.setBrush(QBrush(hora));
@@ -56,7 +58,7 @@ void Relogio::paintEvent(QPaintEvent *event)
 
     }
 \
-    // Seconds
+    // Desenha o ponteiro de Seconds
     painter.restore();
     painter.save();
 
@@ -66,7 +68,30 @@ void Relogio::paintEvent(QPaintEvent *event)
     painter.rotate(this->angleSecond);
     painter.drawLine(QPoint(0,0), QPoint(0,100));
 
+    // desenha o ponteiro de minutos
     painter.restore();
+    painter.save();
+
+    painter.setBrush(QBrush(minuto));
+    painter.setPen(QPen(minuto,2));
+
+    painter.rotate(this->angleMinute);
+    painter.drawLine(QPoint(0,0), QPoint(0,90));
+
+
+
+    // desenha o ponteiro de horas
+    painter.restore();
+    painter.save();
+
+    painter.setBrush(QBrush(hora));
+    painter.setPen(QPen(hora,5));
+
+    painter.rotate(this->angleHour);
+    painter.drawLine(QPoint(0,0), QPoint(0,50));
+
+    painter.restore();
+
 
 
 }
