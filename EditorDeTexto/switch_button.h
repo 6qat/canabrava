@@ -21,8 +21,8 @@ protected:
     void wheelEvent(QWheelEvent *);
 
 private:
-    stateType state;
     const QSize SIZE;
+    stateType state;
 
 
 signals:
