@@ -18,10 +18,13 @@ protected:
 signals:
 
 public slots:
-    void timerAcionado();
+    void timerSecondAcionado();
 
 private:
     QTimer * timer;
+    int angleSecond;
+    int angleMinute;
+    int angleHour;
 
 };
 
