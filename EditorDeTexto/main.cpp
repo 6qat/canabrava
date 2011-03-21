@@ -4,6 +4,7 @@
 #include "relogio.h"
 #include "switch_button.h"
 #include "image_viewer.h"
+#include "snake.h"
 
 
 int main(int argc, char *argv[])
@@ -23,8 +24,12 @@ int main(int argc, char *argv[])
     //QObject::connect(btn,SIGNAL(stateChanged(stateType)),btn, SLOT(teste(stateType)));
     //btn->show();
 
-    ImageViewer *iv = new ImageViewer();
-    iv->show();
+    //ImageViewer *iv = new ImageViewer();
+    //iv->show();
+
+    Snake *snake = new Snake();
+    snake->show();
+
 
     return a.exec();
 }
