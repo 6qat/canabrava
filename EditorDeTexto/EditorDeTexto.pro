@@ -22,10 +22,12 @@ SOURCES += main.cpp \
     test_string.cpp \
     gentle_line_edit.cpp \
     relogio.cpp \
-    switch_button.cpp
+    switch_button.cpp \
+    image_viewer.cpp
 
 HEADERS += \
     janela_principal.h \
     gentle_line_edit.h \
     relogio.h \
-    switch_button.h
+    switch_button.h \
+    image_viewer.h

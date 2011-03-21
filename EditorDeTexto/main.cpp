@@ -3,7 +3,7 @@
 #include "janela_principal.h"
 #include "relogio.h"
 #include "switch_button.h"
-
+#include "image_viewer.h"
 
 
 int main(int argc, char *argv[])
@@ -19,9 +19,12 @@ int main(int argc, char *argv[])
     //Relogio relogio;
     //relogio.show();
 
-    SwitchButton *btn = new SwitchButton();
-    QObject::connect(btn,SIGNAL(stateChanged(stateType)),btn, SLOT(teste(stateType)));
-    btn->show();
+    //SwitchButton *btn = new SwitchButton();
+    //QObject::connect(btn,SIGNAL(stateChanged(stateType)),btn, SLOT(teste(stateType)));
+    //btn->show();
+
+    ImageViewer *iv = new ImageViewer();
+    iv->show();
 
     return a.exec();
 }
