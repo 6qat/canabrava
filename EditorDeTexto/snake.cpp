@@ -14,7 +14,7 @@ Snake::Snake(QWidget *parent):QGraphicsView(parent),m_direcao(Up),m_fruta(0)
     connect(t,SIGNAL(timeout()),this,SLOT(andar()));
 
     QTimer *timer_fruta = new QTimer();
-    timer_fruta->start(1000);
+    timer_fruta->start(10000);
     connect(timer_fruta,SIGNAL(timeout()),this,SLOT(addFruta()));
 
     for (int i=0; i< 3; ++i)
@@ -86,6 +86,16 @@ void Snake::andar()
 
     tail->setPos(x,y);
     m.prepend(tail);
+
+    if(tail->collidesWithItem(m_fruta) && scene() == m_fruta->scene()  )
+    {
+        scene()->removeItem(m_fruta);
+        QGraphicsRectItem *item = new QGraphicsRectItem(0,0,20,20);
+        m<<item;
+        item->setPos(m.last()->pos());
+        scene()->addItem(item);
+
+    }
 
 }
 
