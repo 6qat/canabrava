@@ -4,13 +4,18 @@
 #include <QGraphicsRectItem>
 
 
-Snake::Snake(QWidget *parent):QGraphicsView(parent),m_direcao(Up)
+Snake::Snake(QWidget *parent):QGraphicsView(parent),m_direcao(Up),m_fruta(0)
 {
     setScene(new QGraphicsScene());
     scene()->setSceneRect(0,0,800,600);
+
     QTimer *t = new QTimer();
     t->start(250);
     connect(t,SIGNAL(timeout()),this,SLOT(andar()));
+
+    QTimer *timer_fruta = new QTimer();
+    timer_fruta->start(1000);
+    connect(timer_fruta,SIGNAL(timeout()),this,SLOT(addFruta()));
 
     for (int i=0; i< 3; ++i)
     {
@@ -82,4 +87,12 @@ void Snake::andar()
     tail->setPos(x,y);
     m.prepend(tail);
 
+}
+
+void Snake::addFruta()
+{
+    delete m_fruta;
+    m_fruta = new QGraphicsEllipseItem(0,0,10,10);
+    m_fruta->setPos(rand()%790+1, rand()%590+1);
+    scene()->addItem(m_fruta);
 }

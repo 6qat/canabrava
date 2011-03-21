@@ -19,10 +19,14 @@ signals:
 
 public slots:
     void andar();
+    void addFruta();
 
 private:
     QList<QGraphicsItem*> m;
     m_direcao_type m_direcao;
+    QGraphicsEllipseItem *m_fruta;
+
+
 
 
 };
