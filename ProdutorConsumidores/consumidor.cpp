@@ -1,6 +1,8 @@
 #include "consumidor.h"
 #include <QMutex>
 
+QMutex Consumidor::mtx ;
+
 Consumidor::Consumidor(QListWidget *l, QObject *parent) :
     QThread(parent),listProdutor(l)
 {
@@ -8,10 +10,11 @@ Consumidor::Consumidor(QListWidget *l, QObject *parent) :
 
 void Consumidor::run()
 {
-//    for(;;)
-//    {
+    for(;;)
+    {
 //        QMutex mtx;
 //        mtx.lock();
+        mtx.lock();
         QListWidgetItem *item = this->listProdutor->takeItem(0);
 
         if(item)
@@ -20,9 +23,10 @@ void Consumidor::run()
             emit dadoConsumido(dado);
 
         }
-//    }
+        mtx.unlock();
+    }
 
-    exec();
+    //exec();
 }
 
 
