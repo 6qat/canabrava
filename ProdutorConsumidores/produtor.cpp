@@ -7,7 +7,7 @@ Produtor::Produtor(QObject *parent) :
     QThread(parent),cont(0)
 {
     QTimer *timer = new QTimer;
-    timer->setInterval(1000);
+    timer->setInterval(2000);
     connect(timer,SIGNAL(timeout()),this,SLOT(produzir()));
     timer->start();
 
@@ -15,9 +15,7 @@ Produtor::Produtor(QObject *parent) :
 
 void Produtor::produzir()
 {
-    //static int cont = 0;
     QString dado = QString("Produzindo dado %1").arg(cont);
-    //qDebug() << dado;
     emit dadoProduzido(dado);
     cont++;
 }

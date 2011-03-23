@@ -60,3 +60,7 @@ List & List::operator << (int novo)
 List::~List()
 {
 }
+
+int List::pop()
+{
+}

@@ -1,7 +1,7 @@
 
 #include <QCoreApplication>
 
-#include "List.h"
+#include "list.h"
 
 int main(int argc, char *argv[])
 {

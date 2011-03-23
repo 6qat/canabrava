@@ -14,6 +14,8 @@ public:
         int tamanho() const {return _tamanho;}
         List & operator << (int novo);
 
+        int pop(); // remove o último elemento. Será protegido internamente por mutex
+
         void print();
 
 

@@ -13,10 +13,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     produtor.cpp \
-    consumidor.cpp
+    consumidor.cpp \
+    ../ListaEncadeada/node.cpp \
+    ../ListaEncadeada/list.cpp
 
 HEADERS  += mainwindow.h \
     produtor.h \
-    consumidor.h
+    consumidor.h \
+    ../ListaEncadeada/node.h \
+    ../ListaEncadeada/list.h
 
 FORMS    += mainwindow.ui
