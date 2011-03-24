@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     cena->setSceneRect(0,0,800,600);
     ui->view->setScene(cena);
     ui->view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    ui->view->setRenderHint(QPainter::Antialiasing);
     //ui->view->set
 
 
