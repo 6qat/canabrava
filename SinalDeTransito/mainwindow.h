@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include "semaforo.h"
+
+
 namespace Ui {
     class MainWindow;
 }
@@ -17,6 +20,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Bolinha *verde, *vermelha, *amarela;
+
+public slots:
+    void entrouNoAmarelo();
+    void entrouNoVermelho();
+    void entrouNoVerde();
 };
 
 #endif // MAINWINDOW_H
