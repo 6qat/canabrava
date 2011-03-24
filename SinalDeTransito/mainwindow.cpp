@@ -5,11 +5,27 @@
 #include <QTimer>
 #include <QColor>
 
+#include <QGraphicsTextItem>
+#include <QGraphicsProxyWidget>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QtScript/QScriptEngine> //.evaluate("")
+#include <QtScript/QScriptValue> //toInt(), toString(), etc
+
+#include <QDebug>
+#include <QString>
+
+/*
+  graphicstext->setText(QString::number(retorno) );
+  */
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    engine = new QScriptEngine;
 
     QGraphicsScene *cena = new QGraphicsScene(this);
     cena->setSceneRect(0,0,80,160);
@@ -35,6 +51,25 @@ MainWindow::MainWindow(QWidget *parent) :
     vermelha->setRect(10,165,60,60);
 
     cena->addItem(semaforo);
+
+    //QGraphicsTextItem *texto = new QGraphicsTextItem("texto");
+//    texto->text
+    //cena->addItem(texto);
+    //texto->setPos(0,250);
+
+    QGraphicsProxyWidget *texto = new QGraphicsProxyWidget;
+    line = new QLineEdit("Meu javascript");
+    texto->setWidget(line);
+    texto->setPos(0,250);
+    cena->addItem(texto);
+
+    QGraphicsProxyWidget *proxyButton = new QGraphicsProxyWidget;
+    QPushButton *btnEvaluate = new QPushButton("Evaluate");
+    proxyButton->setWidget(btnEvaluate);
+    proxyButton->setPos(0,280);
+    cena->addItem(proxyButton);
+
+    connect(btnEvaluate,SIGNAL(clicked()),this,SLOT(evaluateJavaScript()));
 
     QTimer *timer = new QTimer;
     timer->setInterval(1000);
@@ -109,4 +144,12 @@ void MainWindow::entrouNoVerde()
     verde->setBrush(QBrush(Qt::green));
     amarela->setBrush(QBrush(am));
     vermelha->setBrush(QBrush(vm));
+}
+
+void MainWindow::evaluateJavaScript()
+{
+    qDebug() << "Evaluating JAVA SCRIPT";
+    QScriptValue valor = engine->evaluate(this->line->text());
+    qDebug() << valor.toString();
+    // qDebug() << QString::number(valor.toInt32());
 }

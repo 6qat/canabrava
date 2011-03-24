@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui script
 
 TARGET = SinalDeTransito
 TEMPLATE = app

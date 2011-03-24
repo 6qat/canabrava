@@ -1,9 +1,13 @@
 #include "cenagl.h"
 #include <QGLWidget>
+#include <QTimer>
 
 CenaGL::CenaGL(QGLWidget *parent) :
     QGLWidget(parent)
 {
+    QTimer *timer = new QTimer;
+    timer->setInterval(1000);
+    timer->start();
 }
 
 void CenaGL::initializeGL()
@@ -17,6 +21,7 @@ void CenaGL::initializeGL()
 
 void CenaGL::resizeGL(int w, int h)
 {
+    glViewport(0,0,w,h);
 }
 
 void CenaGL::paintGL()
@@ -30,5 +35,4 @@ void CenaGL::paintGL()
     glVertex2f(200,400);
     glEnd();
     glFlush();
-
 }
