@@ -3,6 +3,7 @@
 
 #include <QStateMachine>
 #include <QTimer>
+#include <QColor>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -64,21 +65,48 @@ MainWindow::~MainWindow()
 
 void MainWindow::entrouNoAmarelo()
 {
+    QColor am(Qt::yellow);
+    am.setAlpha(100);
+
+    QColor ve(Qt::green);
+    ve.setAlpha(100);
+
+    QColor vm(Qt::red);
+    vm.setAlpha(100);
+
     amarela->setBrush(QBrush(Qt::yellow));
-    vermelha->setBrush(QBrush(Qt::white));
-    verde->setBrush(QBrush(Qt::white));
+    vermelha->setBrush(QBrush(vm));
+    verde->setBrush(QBrush(ve));
 }
 
 void MainWindow::entrouNoVermelho()
 {
+    QColor am(Qt::yellow);
+    am.setAlpha(100);
+
+    QColor ve(Qt::green);
+    ve.setAlpha(100);
+
+    QColor vm(Qt::red);
+    vm.setAlpha(100);
+
     vermelha->setBrush(QBrush(Qt::red));
-    amarela->setBrush(QBrush(Qt::white));
-    verde->setBrush(QBrush(Qt::white));
+    amarela->setBrush(QBrush(am));
+    verde->setBrush(QBrush(ve));
 }
 
 void MainWindow::entrouNoVerde()
 {
+    QColor am(Qt::yellow);
+    am.setAlpha(100);
+
+    QColor ve(Qt::green);
+    ve.setAlpha(100);
+
+    QColor vm(Qt::red);
+    vm.setAlpha(100);
+
     verde->setBrush(QBrush(Qt::green));
-    amarela->setBrush(QBrush(Qt::white));
-    vermelha->setBrush(QBrush(Qt::white));
+    amarela->setBrush(QBrush(am));
+    vermelha->setBrush(QBrush(vm));
 }
