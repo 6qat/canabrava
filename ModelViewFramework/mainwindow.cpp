@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     MeuModelo *model = new MeuModelo(lista);
 
-    QListView * view = ui->listView;
+    //QListView * view = ui->listView;
+    QListView *view = new QListView;
+    setCentralWidget(view);
 
     view->setModel(model);
 
