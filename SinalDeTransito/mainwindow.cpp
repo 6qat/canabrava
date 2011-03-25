@@ -35,7 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
     Semaforo *semaforo = new Semaforo;
-    semaforo->setBrush(QBrush(Qt::black));
+    //semaforo->setBrush(QBrush(Qt::black));
+    semaforo->setProperty("cor", Qt::black);
     semaforo->setRect(0,0,80,240);
 
     verde = new Bolinha(semaforo);
@@ -89,7 +90,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(estadoAmarelo,SIGNAL(entered()), this, SLOT(entrouNoAmarelo()));
 
     sm->setInitialState(estadoVerde);
-    sm->start();
+
+    QTimer::singleShot(0,sm,SLOT(start()));
+    //sm->start();
 
 }
 
