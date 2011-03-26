@@ -46,8 +46,25 @@ public:
             return false;
 
         lista.replace(index.row(), value.toString());
+        emit dataChanged(index,index);
         return true;
     }
+
+    bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex())
+    {
+        beginInsertRows(parent,row,row+count-1);
+        for(int i=0;i<count; ++i)
+            this->lista << QString("Elemento %1").arg(i);
+        endInsertRows();
+        return true;
+    }
+
+    bool removeRows(int row, int count, const QModelIndex &parent)
+    {
+
+    }
+
+
 
 private:
     QStringList lista;

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "meu_modelo.h"
 
 namespace Ui {
     class MainWindow;
@@ -17,6 +18,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    MeuModelo *model;
+
+public slots:
+    void adicionarDados();
 };
 
 #endif // MAINWINDOW_H

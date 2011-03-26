@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList lista;
     lista << "adfaf" << "ddddd" << "ffff " << "ffff";
 
-    MeuModelo *model = new MeuModelo(lista);
+    model = new MeuModelo(lista);
 
     //QListView * view = ui->listView;
     QListView *view = new QListView;
@@ -24,9 +24,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     view->setModel(model);
 
+    connect(ui->actionAdicionarDados, SIGNAL(triggered()), this,SLOT(adicionarDados()));
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::adicionarDados()
+{
+    qDebug() << " Adicionando dados ";
+    model->insertRows(2,5);
 }
